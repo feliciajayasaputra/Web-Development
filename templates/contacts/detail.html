@@ -1,12 +1,12 @@
 {% extends "contacts/layout.html" %}
 
 {% block header %}
-    <h1>Contacts / {{ contact['id'] }}</h1>
+    <h1><img style="height: 60px" src="/img/todo-white.svg"> Contacts / {{ contact['id'] }}</h1>
 {% endblock %}
 
 {% block content %}
 
-    <h2>Contact Info</h2>
+    <h2>Contacts Info</h2>
     <table>
         <tbody>
         <tr>
@@ -24,9 +24,10 @@
                 {{ contact['email'] }}
                 </a>
             </td>
+
         </tr>
         <tr>
-            <th>GUID</th>
+            <th>UUID</th>
             <td>{{ contact['guid'] }}</td>
         </tr>
         </tbody>
@@ -34,4 +35,4 @@
     <form method="post" action="/contacts/{{ contact['id'] }}/delete">
         <button>Delete This Contact</button>
     </form>
-{%  endblock %}
+{% endblock %}

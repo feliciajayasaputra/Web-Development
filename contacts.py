@@ -1,10 +1,11 @@
 import json
-from flask import Flask, request, render_template, redirect, session
 import uuid
+
+from flask import Flask, request, render_template, redirect, session
 
 app = Flask(__name__, static_url_path='', static_folder='static')
 
-app.secret_key = b'asdfasdfasdfase234qwadfadersf/'
+app.secret_key = b'asdfasdfasdfase234gwadfadersf/'
 
 with open("other/data/contacts.json", mode="r", encoding="utf-8") as read_file:
     contact_data = json.load(read_file)
@@ -16,7 +17,6 @@ def index():
 @app.get('/contacts')
 def contacts():
     msg = session.pop('success', None)
-
     search = request.args.get("q")
     if search:
         contacts = []
@@ -26,10 +26,8 @@ def contacts():
                     or search in contact['last_name']):
                 contacts.append(contact)
     else:
-      contacts = contact_data
-
+        contacts = contact_data
     return render_template("contacts/index.html", contacts=contacts, message=msg)
-
 
 @app.get('/contacts/new')
 def contact_new():
@@ -57,7 +55,7 @@ def contact_create():
         return render_template("contacts/new.html", contact=contact, message="Email must be unique")
 
 @app.get('/contacts/<id>')
-def contact_detail(id):
+def contacts_detail(id):
     id_int = int(id)
     for contact in contact_data:
         if id_int == contact['id']:
@@ -65,14 +63,15 @@ def contact_detail(id):
     return render_template("contacts/detail.html", contact=contact)
 
 @app.post('/contacts/<id>/delete')
-def contact_delete(id):
+def contacts_delete(id):
     id_int = int(id)
     for contact in contact_data:
         if id_int == contact['id']:
             break
     contact_data.remove(contact)
-    session['success'] = "Deleted Contact " + id
+    session['success'] = "Deleted Contact " +id
     return redirect("/contacts")
 
+
 if __name__ == '__main__':
-    app.run(port=5000)
+    app.run(port=12345)

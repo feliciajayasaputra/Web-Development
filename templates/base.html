@@ -1,0 +1,27 @@
+<html lang="en">
+<head>
+    <title>TODO App</title>
+    <link rel="stylesheet" href="/css/pico.lime.css">
+    <link rel="stylesheet" href="/css/site.css">
+    <script src="/js/site.js"></script>
+    <script src="/js/Sortable.js"></script>
+    <script src="/js/htmx-2.0.3.js"></script>
+</head>
+<body>
+<header class="container center">
+    <h1><img style="height: 60px" src="/img/todo-white.svg"> TODOApp</h1>
+     <form hx-post="/todos/search"
+           hx-trigger="input changed delay:500ms, search"
+           hx-target="main">
+            <input style="float: right; width: 300px" type="search" name="q" value="{{ search if search is not none else '' }}">
+    </form>
+    <p>A blank canvas upon which to paint our dreams...</p>
+    </form>
+
+
+</header>
+<main class="container">
+    {% block content %}{% endblock %}
+</main>
+</body>
+</html>

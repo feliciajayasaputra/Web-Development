@@ -5,11 +5,13 @@
 {% endblock %}
 
 {% block content %}
-    {% if message %}
-      <div class="alert">
-        {{ message }}
-      </div>
-  {% endif %}
+
+    {%  if message %}
+        <div class="alert">
+            {{ message }}
+        </div>
+    {% endif %}
+
     <h2>Create Contact</h2>
     <form method="post" action="/contacts/new">
     <table>
@@ -17,7 +19,7 @@
         <tr>
             <th>
                 <label for="first_name">
-                First Name
+                    First Name
                 </label>
             </th>
             <td><input id="first_name" name="first_name" value="{{ contact['first_name'] }}"></td>
@@ -25,7 +27,7 @@
         <tr>
             <th>
                 <label for="last_name">
-                Last Name
+                    Last Name
                 </label>
             </th>
             <td><input id="last_name" name="last_name" value="{{ contact['last_name'] }}"></td>
