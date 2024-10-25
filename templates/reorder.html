@@ -1,10 +1,12 @@
-<form hx-post="/todos/reorder"
-      hx-target="main"
-      hx-swap="innerHTML show:main:top">
+{%  extends "base.html" %}
 
-    <ul id="todo-list">
+{%  block content %}
+
+
+<form action="/todos/reorder" method="post">
+    <ul id="todo-list" style="list-style: none">
         {%  for todo in todos %}
-            <li style="list-style: none">>
+            <li>
                 <span class="handle">
                     <img src="/img/drag-handle-svgrepo-com.svg" width="20">
                 </span>
@@ -24,5 +26,5 @@
         animation: 150
     });
 </script>
-
+{% endblock %}
 

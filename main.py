@@ -40,8 +40,7 @@ def toggle_todo(id):
     todo = Todo.find(int(id))
     todo.toggle_completed()
     todo.save()
-    todos = Todo.all(view)
-    return render_template("main.html", todos=todos, view=view, editing=None)
+    return redirect("/todos" + add_view_context(view))
 
 @app.get('/todos/<id>/edit')
 def edit_todo(id):
@@ -66,17 +65,10 @@ def show_reorder_ui():
 
 @app.post('/todos/reorder')
 def update_todo_order():
-    view = request.args.get('view', None)
     id_list = request.form.getlist("ids")
     Todo.reorder(id_list)
-    todos=Todo.all(view)
-    return render_template("main.html", todos=todos, view=view, editing=None)
+    return redirect("/todos")
 
-@app.post('/todos/search')
-def active_search_todo():
-    search = request.form.get('q', None)
-    todos = Todo.all(search=search)
-    return render_template("main.html", todos=todos, editing='')
 
 def add_view_context(view):
     return (("?view=" + view) if view is not None else"")
